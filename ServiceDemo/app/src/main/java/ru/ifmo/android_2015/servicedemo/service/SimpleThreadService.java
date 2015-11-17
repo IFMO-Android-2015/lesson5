@@ -25,6 +25,7 @@ public class SimpleThreadService extends Service implements Runnable {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand");
         if (intent != null) {
             boolean foreground = intent.getBooleanExtra(ServiceThreadActivity.IS_FOREGROUND, false);
             if (foreground) {
@@ -67,8 +68,10 @@ public class SimpleThreadService extends Service implements Runnable {
     public void run() {
         try {
             while (true) {
+                Log.d(TAG, "Do step " + n);
                 doStep(n++);
                 if (n > 1000) {
+                    Log.d(TAG, "Call stopSelf");
                     stopSelf();
                     break;
                 }
